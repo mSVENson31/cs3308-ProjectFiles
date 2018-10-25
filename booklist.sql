@@ -6,7 +6,7 @@ create table if not exists transactions(
 	seller_id integer not null,
 	buyer_id integer not null,
 	qty integer not null, 
-	price float not null, 
+	price float not null,
 	primary key (transaction_id) );
 
 --Fact_users
@@ -17,7 +17,7 @@ create table if not exists users(
 	username varchar(20) not null,
 	password varchar(20) not null,
 	email varchar(40) not null,
-	location varchar(40) not null
+	location varchar(40) not null,
 	primary key (user_id) );
 
 --Fact_books
@@ -28,6 +28,8 @@ create table if not exists books(
 	author_first varchar(20) not null,
 	edition integer not null,
 	publisher varchar(20) not null,
+	cover varchar(10) not null,
+	language varchar(20) not null,
 
 	primary key (book_id) );
 
@@ -40,16 +42,4 @@ create table if not exists correspondance(
 	edition integer not null,
 	publisher varchar(20) not null,
 	
-	username varchar(20) not null,
-	password varchar(20) not null,
-	email varchar(40) not null,
 	primary key (user_id) );
-
---Dates
-create table if not exists dates( 
-	transaction_id serial, 
-	book_id integer not null,
-	seller_id integer not null,
-	buyer_id integer not null,
-	qty integer not null, 
-	price float not null, primary key (id) );
