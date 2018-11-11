@@ -74,16 +74,19 @@ class Account extends React.Component {
 
         <Footer>
           <FooterTab>
-            <Button vertical active>
-              <Icon name="ios-person" />
+            <Button vertical active
+              onPress={() => this.props.switchScreen("account")}
+              ><Icon name="ios-person" />
               <Text style={{color: 'white'}}>Account</Text>
             </Button>
-            <Button vertical>
-              <Icon name="ios-search" />
+            <Button vertical
+              onPress={() => this.props.switchScreen("search")}
+              ><Icon name="ios-search" />
               <Text style={{color: 'white'}}>Search Books</Text>
             </Button>
-            <Button vertical>
-              <Icon active name="book" />
+            <Button vertical
+              onPress={() => this.props.switchScreen("sell")}
+              ><Icon active name="book" />
               <Text style={{color: 'white'}}>Sell Book</Text>
             </Button>
           </FooterTab>
