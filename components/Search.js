@@ -3,13 +3,29 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 // imports for native-base components
 import { Root, Container, Header, Left, Body, Right, 
 Button, Icon, Title, Content, Footer, FooterTab,
-List, ListItem, Separator } from 'native-base';
+List, ListItem, Separator, Input, Item, Form, Picker } from 'native-base';
 import { Font, AppLoading } from "expo";
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    selected1: undefined;
+    selected2: undefined;
     this.state = { loading: true };
+  }
+
+  // function for subject picker
+  onValueChange(value: string) {
+    this.setState({
+      selected1: value
+    });
+  }
+  
+  // function for condition picker
+  onValueChange2(value: string) {
+    this.setState({
+      selected2: value
+    });
   }
   
   // extra needed to import header from native-base

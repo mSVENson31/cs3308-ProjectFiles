@@ -9,7 +9,7 @@ import Sell from './components/Sell';
 export default class App extends React.Component {
   
   state = {
-    currentScreen: "search"
+    currentScreen: "sell"
   }
 
   switchScreen = (screen) => {
