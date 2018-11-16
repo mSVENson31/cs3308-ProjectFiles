@@ -35,13 +35,14 @@ class Account extends React.Component {
       <Container>
         <Header style={styles.headerStyle}>
           <Body>
-            <Title style={{alignSelf: 'center'}}>My Account</Title>
+            <Title style={{alignSelf: 'center'}}>Messages</Title>
           </Body>
         </Header>
 
+        
+        
         <Content>
           <Separator bordered>
-            <Text>Account Information</Text>
           </Separator>
           <ListItem>
             <Text style={styles.accountText}>Username: PLACEHOLDER NAME</Text>
@@ -85,7 +86,7 @@ class Account extends React.Component {
               <Text style={{color: 'white'}}>Search Books</Text>
             </Button>
             <Button vertical
-              onPress={() => this.props.switchScreen("messages")}
+              onPress={() => this.props.switchScreen("sell")}
               ><Icon active name="book" />
               <Text style={{color: 'white'}}>Sell Book</Text>
             </Button>
