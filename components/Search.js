@@ -9,9 +9,12 @@ import { Font, AppLoading } from "expo";
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    selected1: undefined;
-    selected2: undefined;
-    this.state = { loading: true };
+    
+    this.state = { 
+      loading: true,
+      selected1: undefined,
+      selected2: undefined,
+    };
   }
 
   // function for subject picker
@@ -28,7 +31,7 @@ class Search extends React.Component {
     });
   }
   
-  // extra needed to import header from native-base
+  // extra function needed to import header from native-base
   async componentWillMount() {
     await Font.loadAsync({
       Roboto: require("native-base/Fonts/Roboto.ttf"),

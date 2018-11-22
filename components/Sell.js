@@ -9,9 +9,25 @@ import { Font, AppLoading } from "expo";
 class Sell extends React.Component {
   constructor(props) {
     super(props);
-    selected1: undefined;
-    selected2: undefined;
-    this.state = { loading: true };
+    
+    this.state = {
+      loading: true,
+      selected1: undefined,
+      selected2: undefined,
+      title: "",
+      author: "",
+      isbn: "",
+      price: "",
+    };
+  }
+
+  // extra needed to import header from native-base
+  async componentWillMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+    });
+    this.setState({ loading: false });
   }
 
   // function for subject picker
@@ -28,13 +44,8 @@ class Sell extends React.Component {
     });
   }
   
-  // extra needed to import header from native-base
-  async componentWillMount() {
-    await Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
-      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
-    });
-    this.setState({ loading: false });
+  postTextbook(title, author, isbn, price) {
+    alert("isbn:" + isbn + " price: " + price);
   }
 
   render() {
@@ -90,22 +101,35 @@ class Sell extends React.Component {
               >
                 <Picker.Item label="<Select Conditoin>" value="key0" />
                 <Picker.Item label="Used - Poor" value="key1" />
-                <Picker.Item label="Used - Good" value="key1" />
-                <Picker.Item label="New" value="key2" />
+                <Picker.Item label="Used - Good" value="key2" />
+                <Picker.Item label="New" value="key3" />
               </Picker>
             </Item>
           </Form>
           <Item regular>
-            <Input placeholder='Title' />
+            <Input 
+              placeholder='Title' 
+              onChangeText={(title) => this.setState({title})}
+            />
           </Item>
           <Item regular>
-            <Input placeholder='Author' />
+            <Input 
+              placeholder='Author' 
+              onChangeText={(author) => this.setState({author})}
+            />
           </Item>
           <Item regular>
-            <Input placeholder='ISBN' />
+            <Input 
+              placeholder='ISBN'
+              onChangeText={(isbn) => this.setState({isbn})}
+            />
           </Item>
           <Item regular>
-            <Input placeholder='Asking Price' keyboardType='numeric' />
+            <Input 
+              placeholder='Asking Price'
+              keyboardType='numeric' 
+              onChangeText={(price) => this.setState({price})}
+              />
           </Item>
           <Item regular>
             <Input placeholder='Your City' />
@@ -115,7 +139,7 @@ class Sell extends React.Component {
         <View style={styles.bodyContainerLower}>
           <Button rounded 
             style={styles.buttonStyle}
-            // onPress={() => this.props.switchScreen("login")}
+            onPress={() => this.postTextbook(this.state.title, this.state.author, this.state.isbn, this.state.price)}
             ><Text style={styles.buttonText}>Post Textbook</Text>
           </Button>
         </View>

@@ -9,7 +9,9 @@ import { Font, AppLoading } from "expo";
 class Account extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
+    this.state = {
+      loading: true 
+    };
   }
   
   // extra needed to import header from native-base

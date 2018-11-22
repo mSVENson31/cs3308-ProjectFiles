@@ -43,19 +43,6 @@ class Login extends React.Component {
     }
   }
 
-  // loginUser = (email, password, switchScreen) => {
-  //   try {
-  //     firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-  //       console.log(user);
-  //       switchScreen("account");
-  //     })
-  //   }
-  //   catch(error) {
-  //     // console.log(error.toString())
-  //     alert("incorrect email or password");
-  //   }
-  // }
-
   loginUser = (email, password, switchScreen) => {
     if (email != '' && password != '') {
       try {
