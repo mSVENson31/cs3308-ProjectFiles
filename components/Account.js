@@ -49,7 +49,7 @@ class Account extends React.Component {
             <Text style={styles.accountText}>Username: PLACEHOLDER NAME</Text>
           </ListItem>
           <ListItem last>
-            <Text style={styles.accountText}>Email: PLACEHOLDER EMAIL</Text>
+            <Text style={styles.accountText}>Email: {this.props.userEmail}</Text>
           </ListItem>
         </Content>
 
@@ -87,7 +87,7 @@ class Account extends React.Component {
               <Text style={{color: 'white'}}>Search Books</Text>
             </Button>
             <Button vertical
-              onPress={() => this.props.switchScreen("messages")}
+              onPress={() => this.props.switchScreen("sell")}
               ><Icon active name="book" />
               <Text style={{color: 'white'}}>Sell Book</Text>
             </Button>

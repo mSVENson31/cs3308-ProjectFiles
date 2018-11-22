@@ -5,6 +5,18 @@ import { Root, Container, Header, Left, Body, Right,
 Button, Icon, Title, Content, Footer, FooterTab,
 List, ListItem, Separator, Input, Item, Form, Picker } from 'native-base';
 import { Font, AppLoading } from "expo";
+import firebase from './Firebase';
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
+
+// ignore specific warning (caused by expo bug)
+YellowBox.ignoreWarnings(['Setting a timer']);
+const _console = _.clone(console);
+console.warn = message => {
+  if (message.indexOf('Setting a timer') <= -1) {
+    _console.warn(message);
+  }
+};
 
 class Sell extends React.Component {
   constructor(props) {
@@ -12,12 +24,13 @@ class Sell extends React.Component {
     
     this.state = {
       loading: true,
-      selected1: undefined,
-      selected2: undefined,
+      subject: undefined,
+      condition: undefined,
       title: "",
       author: "",
       isbn: "",
       price: "",
+      city: "",
     };
   }
 
@@ -33,19 +46,43 @@ class Sell extends React.Component {
   // function for subject picker
   onValueChange(value: string) {
     this.setState({
-      selected1: value
+      subject: value
     });
   }
   
   // function for condition picker
   onValueChange2(value: string) {
     this.setState({
-      selected2: value
+      condition: value
     });
   }
   
-  postTextbook(title, author, isbn, price) {
-    alert("isbn:" + isbn + " price: " + price);
+  postTextbook() {
+    var firebaseRef = firebase.database().ref();
+    var listingsRef = firebaseRef.child("listings");
+    if (this.state.subject != undefined 
+      && this.state.condition != undefined 
+      && this.state.title != ""
+      && this.state.author != ""
+      && this.state.isbn != ""
+      && this.state.price != ""
+      && this.state.city != "") {
+      listingsRef.push({
+        title: this.state.title,
+        author: this.state.author,
+        isbn: this.state.isbn,
+        price: this.state.price,
+        subject: this.state.subject,
+        condition: this.state.condition,
+        city: this.state.city,
+        uid: this.props.userId,
+        userEmail: this.props.userEmail,
+      });
+      alert("your textbook has been posted");
+    }
+    else {
+      alert("please fill out all of the fields")
+    }
   }
 
   render() {
@@ -71,19 +108,19 @@ class Sell extends React.Component {
             <Item picker>
               <Picker
                 mode="dropdown"
-                iosIcon={<Icon name="ios-arrow-down-outline" />}
+                iosIcon={<Icon name="ios-arrow-down" />}
                 style={{ width: undefined }}
                 placeholder="Select Condition"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.selected2}
+                selectedValue={this.state.subject}
                 onValueChange={this.onValueChange.bind(this)}
               >
-                <Picker.Item label="<Select Subject>" value="key0" />
-                <Picker.Item label="Biology" value="key1" />
-                <Picker.Item label="Computer Science" value="key2" />
-                <Picker.Item label="Math" value="key3" />
-                <Picker.Item label="Psychology" value="key4" />
+                <Picker.Item label="<Select Subject>" value="" />
+                <Picker.Item label="Biology" value="biology" />
+                <Picker.Item label="Computer Science" value="computer science" />
+                <Picker.Item label="Math" value="math" />
+                <Picker.Item label="Psychology" value="psychology" />
               </Picker>
             </Item>
           </Form>
@@ -91,18 +128,18 @@ class Sell extends React.Component {
             <Item picker>
               <Picker
                 mode="dropdown"
-                iosIcon={<Icon name="ios-arrow-down-outline" />}
+                iosIcon={<Icon name="ios-arrow-down" />}
                 style={{ width: undefined }}
                 placeholder="Select Condition"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.selected2}
+                selectedValue={this.state.condition}
                 onValueChange={this.onValueChange2.bind(this)}
               >
-                <Picker.Item label="<Select Conditoin>" value="key0" />
-                <Picker.Item label="Used - Poor" value="key1" />
-                <Picker.Item label="Used - Good" value="key2" />
-                <Picker.Item label="New" value="key3" />
+                <Picker.Item label="<Select Conditoin>" value="" />
+                <Picker.Item label="Used - Poor" value="used - poor" />
+                <Picker.Item label="Used - Good" value="used - good" />
+                <Picker.Item label="New" value="new" />
               </Picker>
             </Item>
           </Form>
@@ -132,7 +169,10 @@ class Sell extends React.Component {
               />
           </Item>
           <Item regular>
-            <Input placeholder='Your City' />
+            <Input 
+              placeholder='Your City' 
+              onChangeText={(city) => this.setState({city})}
+            />
           </Item>
         </Content>
 

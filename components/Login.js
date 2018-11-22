@@ -1,18 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Container, Header, Content, Form, Item, Input } from 'native-base';
-import * as firebase from 'firebase';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA_MfCMPy8STztdl6zX6xdmtyR-UGABOGU",
-  authDomain: "booklist-9d89f.firebaseapp.com",
-  databaseURL: "https://booklist-9d89f.firebaseio.com",
-  projectId: "booklist-9d89f",
-  storageBucket: "booklist-9d89f.appspot.com",
-  messagingSenderId: "472931690649"
-};
-
-firebase.initializeApp(firebaseConfig);
+import firebase from './Firebase';
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,7 +14,7 @@ class Login extends React.Component {
   }
 
   signUpUser = (email, password) => {
-    if (email != '' && password != '') {
+    if (email != '' || password != '') {
       try {
         if(this.state.password.length < 5) {
           alert("password must be 5 or more characters");
@@ -44,17 +33,15 @@ class Login extends React.Component {
   }
 
   loginUser = (email, password, switchScreen) => {
-    if (email != '' && password != '') {
-      try {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-          console.log(user);
-          switchScreen("account");
-        })
-      }
-      catch(error) {
-        // console.log(error.toString())
-        alert("incorrect email or password");
-      }
+    if (email != '' || password != '') {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(function (user) {
+        console.log(user);
+        switchScreen("account");
+      })
+      .catch(() => {
+        alert("incorrect user name or password")
+      })
     }
     else {
       alert("please enter an email and password");
@@ -70,6 +57,8 @@ class Login extends React.Component {
             <Item>
               <Input 
                 placeholder="Email"
+                keyboardType='email-address'
+                autoCapitalize='none'
                 onChangeText={(email) => this.setState({email})} />
             </Item>
             <Item last>
