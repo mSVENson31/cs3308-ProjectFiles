@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 // imports for native-base components
-import { Root, Container, Header, Left, Body, Right, 
+import { Root, Container, Header, Left, Body, Right,
 Button, Icon, Title, Content, Footer, FooterTab,
 List, ListItem, Separator, Input, Item, Form, Picker } from 'native-base';
 import { Font, AppLoading } from "expo";
@@ -9,8 +9,8 @@ import { Font, AppLoading } from "expo";
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.state = { 
+
+    this.state = {
       loading: true,
       selected1: undefined,
       selected2: undefined,
@@ -23,14 +23,14 @@ class Search extends React.Component {
       selected1: value
     });
   }
-  
+
   // function for condition picker
   onValueChange2(value: string) {
     this.setState({
       selected2: value
     });
   }
-  
+
   // extra function needed to import header from native-base
   async componentWillMount() {
     await Font.loadAsync({
@@ -39,7 +39,12 @@ class Search extends React.Component {
     });
     this.setState({ loading: false });
   }
+  state = {
+    textbookSearch: ""
+  }
+  searchTextbook = () =>{
 
+  }
   render() {
     // wait until fonts finish loading
     if (this.state.loading) {
@@ -52,14 +57,24 @@ class Search extends React.Component {
     // main return
     return (
       <Container>
-        <Header style={styles.headerStyle}>
-          <Body>
-            <Title style={{alignSelf: 'center'}}>Search Textbooks</Title>
-          </Body>
+        <Header
+          style={styles.headerStyle}
+          searchBar
+          rounded
+        >
+          <Item>
+            <Icon name="ios-search" onPress={this.searchTextbook}/>
+            <Input
+              value={this.state.textbookSearch}
+              placeholder="Search Textbook"
+              onChangeText={(textbookSearch)=>this.setState({textbookSearch})}
+            />
+          </Item>
+
         </Header>
 
         <Content>
-          
+
         </Content>
 
         <Footer>
