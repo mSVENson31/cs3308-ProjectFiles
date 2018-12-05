@@ -64,12 +64,17 @@ class Account extends React.Component {
             <Text style={styles.bigButtonText}>My Books For Sale</Text>
             <Icon name='ios-arrow-forward' />
           </Button>
+          <Button primary onPress={() => this.props.switchScreen("messages")}
+                        style={styles.bigButtonStyle}  
+            ><Text style={styles.bigButtonText}>My Messages</Text>
+            <Icon name='ios-arrow-forward' />
+          </Button>
         </View>
 
         <View style={styles.bodyContainerLower}>
           <Button rounded 
             style={styles.buttonStyle}
-            onPress={() => this.props.switchScreen("login")}
+            onPress={() => this.props.switchScreen("Login")}
             ><Text style={styles.buttonText}>Log Out</Text>
           </Button>
         </View>
@@ -77,19 +82,19 @@ class Account extends React.Component {
         <Footer>
           <FooterTab>
             <Button vertical active
-              onPress={() => this.props.switchScreen("account")}
+              onPress={() => this.props.switchScreen("Account")}
               ><Icon name="ios-person" />
-              <Text style={{color: 'white'}}>Account</Text>
+              <Text style={{color: 'black'}}>Account</Text>
             </Button>
             <Button vertical
-              onPress={() => this.props.switchScreen("search")}
+              onPress={() => this.props.switchScreen("Search")}
               ><Icon name="ios-search" />
-              <Text style={{color: 'white'}}>Search Books</Text>
+              <Text style={{color: 'black'}}>Search Books</Text>
             </Button>
             <Button vertical
-              onPress={() => this.props.switchScreen("sell")}
+              onPress={() => this.props.switchScreen("Sell")}
               ><Icon active name="book" />
-              <Text style={{color: 'white'}}>Sell Book</Text>
+              <Text style={{color: 'black'}}>Sell Book</Text>
             </Button>
           </FooterTab>
         </Footer>

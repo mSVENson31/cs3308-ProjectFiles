@@ -70,7 +70,7 @@ class Account extends React.Component {
         <View style={styles.bodyContainerLower}>
           <Button rounded 
             style={styles.buttonStyle}
-            onPress={() => this.props.switchScreen("login")}
+            onPress={() => this.props.switchScreen("Login")}
             ><Text style={styles.buttonText}>Log Out</Text>
           </Button>
         </View>
@@ -78,17 +78,17 @@ class Account extends React.Component {
         <Footer>
           <FooterTab>
             <Button vertical active
-              onPress={() => this.props.switchScreen("account")}
+              onPress={() => this.props.switchScreen("Account")}
               ><Icon name="ios-person" />
               <Text style={{color: 'white'}}>Account</Text>
             </Button>
             <Button vertical
-              onPress={() => this.props.switchScreen("search")}
+              onPress={() => this.props.switchScreen("Search")}
               ><Icon name="ios-search" />
               <Text style={{color: 'white'}}>Search Books</Text>
             </Button>
             <Button vertical
-              onPress={() => this.props.switchScreen("sell")}
+              onPress={() => this.props.switchScreen("Sell")}
               ><Icon active name="book" />
               <Text style={{color: 'white'}}>Sell Book</Text>
             </Button>
