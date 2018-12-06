@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Platform, ListView } from 'react-native';
 // imports for native-base components
 import { Root, Container, Header, Left, Body, Right,
 Button, Icon, Title, Content, Footer, FooterTab,
@@ -8,7 +8,12 @@ import { Font, AppLoading } from "expo";
 import SearchBody from './SearchBody';
 import firebase from './Firebase';
 
+var searchTitles = [];
+var searchAuthors = [];
+var searchPrices = [];
+
 class Search extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -16,9 +21,10 @@ class Search extends React.Component {
       loading: true,
       selected1: undefined,
       selected2: undefined,
-      textbookSearch: "test",
+      textbookSearch: "",
       onCall: true,
-      info: {},
+      // info: {},
+      // searchMatches: ["book 1", "book 2"],
     };
   }
 
@@ -45,58 +51,59 @@ class Search extends React.Component {
     this.setState({ loading: false });
   }
 
-  searchTextbook = (searchText) =>{
-    this.setState({onCall: true});
-    var match = false;
+  searchTextbook = () =>{
+
     var self = this;
-    var firebaseRef = firebase.database().ref();
+    searchTitles = [];
+    searchAuthors = [];
+    searchPrices = [];
 
-    var listingsRef = firebaseRef.child("/listings");
-    // firebase.database().ref('listings').on('value', (data) => {
-    //   var name = data.key;
-    //   console.log(name);
-    //   self.setState({info:data.toJSON().info})
-    //   self.setState({onCall: false});
-    // })
-    listingsRef.on('child_added', function(snapshot) {
-      var title = snapshot.val().title;
-      var author = snapshot.val().author;
-      var search = self.state.textbookSearch;
-      var id = snapshot.key;
-      //var userSearch = this.state.textbookSearch;
-      // console.log(self.state.textbookSearch);
-      // console.log("id:");
+    if (self.state.textbookSearch != "") {
 
-      // if(self.state.textbookSearch == snapshot.val().title){
-      //   console.log(author);
-      // }
-      // else {
-      //   console.log("Textbook not found");
-      // }
+      this.setState({onCall: true});
+      var match = false;
 
-      if(title.indexOf(search) > -1 || author.indexOf(search) > -1){
-        console.log("IT WORKS");
-        self.setState({info:snapshot.val()});
-      }
-      else{
-        console.log("Textbook not found");
-      }
-      self.setState({onCall: false});
-    });
+      var firebaseRef = firebase.database().ref();
+      var listingsRef = firebaseRef.child("/listings");
+      
+      listingsRef.on('child_added', function(snapshot) {
+        var title = snapshot.val().title;
+        var author = snapshot.val().author;
+        var search = self.state.textbookSearch.toLowerCase();
+        var id = snapshot.key;
+
+        // check if any books match search criteria
+        if(title.indexOf(search) > -1 || author.indexOf(search) > -1){
+          searchTitles.push(snapshot.val().title);
+          searchAuthors.push(snapshot.val().author);
+          searchPrices.push(snapshot.val().price);
+        }
+        else{
+          console.log("Textbook not found");
+        }
+        self.setState({onCall: false});
+      });
+    }
+    else {
+      alert("please enter a book title or author")
+    }
   }
+
   renderBody = ()=>{
     if(this.state.onCall){
       return(
-        <Text>Loading</Text>
+        <Body style={{flex: 1, paddingTop: '5%', fontSize: 16}}>
+          <Text style={{alignItems: 'center', fontWeight: 'bold'}}>enter a book title or author</Text>
+        </Body>
       )
     }
     else{
       return(
-
-        <SearchBody info={this.state.info}/>
+        <SearchBody searchTitles={searchTitles} searchAuthors={searchAuthors} searchPrices={searchPrices} />
       )
     }
   }
+
   render() {
     // wait until fonts finish loading
     if (this.state.loading) {
@@ -116,7 +123,7 @@ class Search extends React.Component {
             rounded
           >
             <Item>
-              <Icon name="ios-search"/>
+              <Icon name="ios-search" onPress={this.searchTextbook}/>
               <Input
                 // value={this.state.textbookSearch}
                 placeholder="Search Textbook"
@@ -127,11 +134,9 @@ class Search extends React.Component {
               <Text>Search</Text>
             </Button>
           </Header>
+
           {this.renderBody()}
         </View>
-        <Content>
-
-        </Content>
 
         <Footer>
           <FooterTab>

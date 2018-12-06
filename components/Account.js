@@ -42,24 +42,12 @@ class Account extends React.Component {
         </Header>
 
         <Content>
-          <Separator bordered>
-            <Text>Account Information</Text>
-          </Separator>
-          <ListItem>
-            <Text style={styles.accountText}>Username: PLACEHOLDER NAME</Text>
-          </ListItem>
           <ListItem last>
             <Text style={styles.accountText}>Email: {this.props.userEmail}</Text>
           </ListItem>
         </Content>
 
-        <View style={{marginTop: '10%'}}></View>
-
         <View style={styles.bodyContainerUpper}>
-          <Button primary style={styles.bigButtonStyle}>
-            <Text style={styles.bigButtonText}>My Watchlist</Text>
-            <Icon name='ios-arrow-forward' />
-          </Button>
           <Button primary style={styles.bigButtonStyle}>
             <Text style={styles.bigButtonText}>My Books For Sale</Text>
             <Icon name='ios-arrow-forward' />
@@ -109,6 +97,7 @@ const styles = {
   },
   accountText: {
     fontSize: 16,
+    fontWeight: 'bold'
   },
   bodyContainerLower: {
     flex: 1,

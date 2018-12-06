@@ -14,7 +14,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       loading: true,
-      currentScreen: "login",
+      currentScreen: "search",
     };
   }
 
