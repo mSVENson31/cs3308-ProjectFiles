@@ -92,8 +92,8 @@ class Search extends React.Component {
   renderBody = ()=>{
     if(this.state.onCall){
       return(
-        <Body style={{flex: 1, paddingTop: '5%', fontSize: 16}}>
-          <Text style={{alignItems: 'center', fontWeight: 'bold'}}>enter a book title or author</Text>
+        <Body style={{flex: 1, paddingTop: '5%'}}>
+          <Text style={{alignItems: 'center', fontWeight: 'bold', fontSize: 16}}>Enter A Book Title or Author</Text>
         </Body>
       )
     }

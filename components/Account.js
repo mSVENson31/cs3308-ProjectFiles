@@ -42,9 +42,7 @@ class Account extends React.Component {
         </Header>
 
         <Content>
-          <ListItem last>
             <Text style={styles.accountText}>Email: {this.props.userEmail}</Text>
-          </ListItem>
         </Content>
 
         <View style={styles.bodyContainerUpper}>
@@ -97,7 +95,9 @@ const styles = {
   },
   accountText: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: '5%'
   },
   bodyContainerLower: {
     flex: 1,

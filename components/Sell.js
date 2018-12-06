@@ -118,9 +118,11 @@ class Sell extends React.Component {
               >
                 <Picker.Item label="<Select Subject>" value="" />
                 <Picker.Item label="Biology" value="biology" />
+                <Picker.Item label="Chemistry" value="chemistry" />
                 <Picker.Item label="Computer Science" value="computer science" />
+                <Picker.Item label="Economics" value="economics" />
                 <Picker.Item label="Math" value="math" />
-                <Picker.Item label="Psychology" value="psychology" />
+                <Picker.Item label="Psychology" value="psychology" />        
               </Picker>
             </Item>
           </Form>
@@ -136,7 +138,7 @@ class Sell extends React.Component {
                 selectedValue={this.state.condition}
                 onValueChange={this.onValueChange2.bind(this)}
               >
-                <Picker.Item label="<Select Conditoin>" value="" />
+                <Picker.Item label="<Select Condition>" value="" />
                 <Picker.Item label="Used - Poor" value="used - poor" />
                 <Picker.Item label="Used - Good" value="used - good" />
                 <Picker.Item label="New" value="new" />
