@@ -5,6 +5,8 @@ import { Root, Container, Header, Left, Body, Right,
 Button, Icon, Title, Content, Footer, FooterTab,
 List, ListItem, Separator, Input, Item, Form, Picker } from 'native-base';
 import { Font, AppLoading } from "expo";
+import SearchBody from './SearchBody';
+import firebase from './Firebase';
 
 class Search extends React.Component {
   constructor(props) {
@@ -14,6 +16,9 @@ class Search extends React.Component {
       loading: true,
       selected1: undefined,
       selected2: undefined,
+      textbookSearch: "test",
+      onCall: true,
+      info: {},
     };
   }
 
@@ -39,11 +44,58 @@ class Search extends React.Component {
     });
     this.setState({ loading: false });
   }
-  state = {
-    textbookSearch: ""
-  }
-  searchTextbook = () =>{
 
+  searchTextbook = (searchText) =>{
+    this.setState({onCall: true});
+    var match = false;
+    var self = this;
+    var firebaseRef = firebase.database().ref();
+
+    var listingsRef = firebaseRef.child("/listings");
+    // firebase.database().ref('listings').on('value', (data) => {
+    //   var name = data.key;
+    //   console.log(name);
+    //   self.setState({info:data.toJSON().info})
+    //   self.setState({onCall: false});
+    // })
+    listingsRef.on('child_added', function(snapshot) {
+      var title = snapshot.val().title;
+      var author = snapshot.val().author;
+      var search = self.state.textbookSearch;
+      var id = snapshot.key;
+      //var userSearch = this.state.textbookSearch;
+      // console.log(self.state.textbookSearch);
+      // console.log("id:");
+
+      // if(self.state.textbookSearch == snapshot.val().title){
+      //   console.log(author);
+      // }
+      // else {
+      //   console.log("Textbook not found");
+      // }
+
+      if(title.indexOf(search) > -1 || author.indexOf(search) > -1){
+        console.log("IT WORKS");
+        self.setState({info:snapshot.val()});
+      }
+      else{
+        console.log("Textbook not found");
+      }
+      self.setState({onCall: false});
+    });
+  }
+  renderBody = ()=>{
+    if(this.state.onCall){
+      return(
+        <Text>Loading</Text>
+      )
+    }
+    else{
+      return(
+
+        <SearchBody info={this.state.info}/>
+      )
+    }
   }
   render() {
     // wait until fonts finish loading
@@ -57,22 +109,26 @@ class Search extends React.Component {
     // main return
     return (
       <Container>
-        <Header
-          style={styles.headerStyle}
-          searchBar
-          rounded
-        >
-          <Item>
-            <Icon name="ios-search" onPress={this.searchTextbook}/>
-            <Input
-              value={this.state.textbookSearch}
-              placeholder="Search Textbook"
-              onChangeText={(textbookSearch)=>this.setState({textbookSearch})}
-            />
-          </Item>
-
-        </Header>
-
+        <View style ={{flex:1}}>
+          <Header
+            style={styles.headerStyle}
+            searchBar
+            rounded
+          >
+            <Item>
+              <Icon name="ios-search"/>
+              <Input
+                // value={this.state.textbookSearch}
+                placeholder="Search Textbook"
+                onChangeText={(textbookSearch)=>this.setState({textbookSearch})}
+              />
+            </Item>
+            <Button transparent onPress={this.searchTextbook}>
+              <Text>Search</Text>
+            </Button>
+          </Header>
+          {this.renderBody()}
+        </View>
         <Content>
 
         </Content>
@@ -82,17 +138,17 @@ class Search extends React.Component {
             <Button vertical
               onPress={() => this.props.switchScreen("account")}
               ><Icon name="ios-person" />
-              <Text style={{color: 'white'}}>Account</Text>
+              <Text style={{color: 'black'}}>Account</Text>
             </Button>
             <Button vertical active
               onPress={() => this.props.switchScreen("search")}
               ><Icon name="ios-search" />
-              <Text style={{color: 'white'}}>Search Books</Text>
+              <Text style={{color: 'black'}}>Search Books</Text>
             </Button>
             <Button vertical
               onPress={() => this.props.switchScreen("sell")}
               ><Icon active name="book" />
-              <Text style={{color: 'white'}}>Sell Book</Text>
+              <Text style={{color: 'black'}}>Sell Book</Text>
             </Button>
           </FooterTab>
         </Footer>

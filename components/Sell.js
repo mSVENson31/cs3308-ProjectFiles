@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 // imports for native-base components
-import { Root, Container, Header, Left, Body, Right, 
+import { Root, Container, Header, Left, Body, Right,
 Button, Icon, Title, Content, Footer, FooterTab,
 List, ListItem, Separator, Input, Item, Form, Picker } from 'native-base';
 import { Font, AppLoading } from "expo";
@@ -21,7 +21,7 @@ console.warn = message => {
 class Sell extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       loading: true,
       subject: undefined,
@@ -49,27 +49,27 @@ class Sell extends React.Component {
       subject: value
     });
   }
-  
+
   // function for condition picker
   onValueChange2(value: string) {
     this.setState({
       condition: value
     });
   }
-  
+
   postTextbook() {
     var firebaseRef = firebase.database().ref();
     var listingsRef = firebaseRef.child("listings");
-    if (this.state.subject != undefined 
-      && this.state.condition != undefined 
+    if (this.state.subject != undefined
+      && this.state.condition != undefined
       && this.state.title != ""
       && this.state.author != ""
       && this.state.isbn != ""
       && this.state.price != ""
       && this.state.city != "") {
       listingsRef.push({
-        title: this.state.title,
-        author: this.state.author,
+        title: this.state.title.toLowerCase(),
+        author: this.state.author.toLowerCase(),
         isbn: this.state.isbn,
         price: this.state.price,
         subject: this.state.subject,
@@ -144,40 +144,40 @@ class Sell extends React.Component {
             </Item>
           </Form>
           <Item regular>
-            <Input 
-              placeholder='Title' 
+            <Input
+              placeholder='Title'
               onChangeText={(title) => this.setState({title})}
             />
           </Item>
           <Item regular>
-            <Input 
-              placeholder='Author' 
+            <Input
+              placeholder='Author'
               onChangeText={(author) => this.setState({author})}
             />
           </Item>
           <Item regular>
-            <Input 
+            <Input
               placeholder='ISBN'
               onChangeText={(isbn) => this.setState({isbn})}
             />
           </Item>
           <Item regular>
-            <Input 
+            <Input
               placeholder='Asking Price'
-              keyboardType='numeric' 
+              keyboardType='numeric'
               onChangeText={(price) => this.setState({price})}
               />
           </Item>
           <Item regular>
-            <Input 
-              placeholder='Your City' 
+            <Input
+              placeholder='Your City'
               onChangeText={(city) => this.setState({city})}
             />
           </Item>
         </Content>
 
         <View style={styles.bodyContainerLower}>
-          <Button rounded 
+          <Button rounded
             style={styles.buttonStyle}
             onPress={() => this.postTextbook(this.state.title, this.state.author, this.state.isbn, this.state.price)}
             ><Text style={styles.buttonText}>Post Textbook</Text>
@@ -189,17 +189,17 @@ class Sell extends React.Component {
             <Button vertical
               onPress={() => this.props.switchScreen("account")}
               ><Icon name="ios-person" />
-              <Text style={{color: 'white'}}>Account</Text>
+              <Text style={{color: 'black'}}>Account</Text>
             </Button>
             <Button vertical
               onPress={() => this.props.switchScreen("search")}
               ><Icon name="ios-search" />
-              <Text style={{color: 'white'}}>Search Books</Text>
+              <Text style={{color: 'black'}}>Search Books</Text>
             </Button>
             <Button vertical active
               onPress={() => this.props.switchScreen("sell")}
               ><Icon active name="book" />
-              <Text style={{color: 'white'}}>Sell Book</Text>
+              <Text style={{color: 'black'}}>Sell Book</Text>
             </Button>
           </FooterTab>
         </Footer>

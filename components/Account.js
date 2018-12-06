@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 // imports for native-base components
-import { Root, Container, Header, Left, Body, Right, 
+import { Root, Container, Header, Left, Body, Right,
 Button, Icon, Title, Content, Footer, FooterTab,
 List, ListItem, Separator } from 'native-base';
 import { Font, AppLoading } from "expo";
@@ -10,10 +10,10 @@ class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true 
+      loading: true
     };
   }
-  
+
   // extra needed to import header from native-base
   async componentWillMount() {
     await Font.loadAsync({
@@ -54,7 +54,7 @@ class Account extends React.Component {
         </Content>
 
         <View style={{marginTop: '10%'}}></View>
-        
+
         <View style={styles.bodyContainerUpper}>
           <Button primary style={styles.bigButtonStyle}>
             <Text style={styles.bigButtonText}>My Watchlist</Text>
@@ -67,7 +67,7 @@ class Account extends React.Component {
         </View>
 
         <View style={styles.bodyContainerLower}>
-          <Button rounded 
+          <Button rounded
             style={styles.buttonStyle}
             onPress={() => this.props.switchScreen("login")}
             ><Text style={styles.buttonText}>Log Out</Text>
@@ -79,17 +79,17 @@ class Account extends React.Component {
             <Button vertical active
               onPress={() => this.props.switchScreen("account")}
               ><Icon name="ios-person" />
-              <Text style={{color: 'white'}}>Account</Text>
+              <Text style={{color: 'black'}}>Account</Text>
             </Button>
             <Button vertical
               onPress={() => this.props.switchScreen("search")}
               ><Icon name="ios-search" />
-              <Text style={{color: 'white'}}>Search Books</Text>
+              <Text style={{color: 'black'}}>Search Books</Text>
             </Button>
             <Button vertical
               onPress={() => this.props.switchScreen("sell")}
               ><Icon active name="book" />
-              <Text style={{color: 'white'}}>Sell Book</Text>
+              <Text style={{color: 'black'}}>Sell Book</Text>
             </Button>
           </FooterTab>
         </Footer>
