@@ -6,6 +6,7 @@ import Account from './components/Account';
 import Search from './components/Search';
 import Sell from './components/Sell';
 import firebase from './components/Firebase';
+import messages from './components/messages';
 
 export default class App extends React.Component {
 
@@ -58,6 +59,11 @@ export default class App extends React.Component {
     else if (this.state.currentScreen === "search" && this.state.user) {
       return (
         <Search switchScreen = {this.switchScreen} />
+      );
+    }
+    else if (this.state.currentScreen === "messages" && this.state.user) {
+      return (
+        <messages switchScreen = {this.switchScreen} />
       );
     }
     else if (this.state.currentScreen === "sell" && this.state.user) {

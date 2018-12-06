@@ -64,6 +64,11 @@ class Account extends React.Component {
             <Text style={styles.bigButtonText}>My Books For Sale</Text>
             <Icon name='ios-arrow-forward' />
           </Button>
+          <Button primary onPress={() => this.props.switchScreen("messages")}
+                        style={styles.bigButtonStyle}  
+            ><Text style={styles.bigButtonText}>My Messages</Text>
+            <Icon name='ios-arrow-forward' />
+          </Button>
         </View>
 
         <View style={styles.bodyContainerLower}>
