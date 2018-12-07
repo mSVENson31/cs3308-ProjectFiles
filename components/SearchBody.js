@@ -108,6 +108,9 @@ class SearchBody extends React.Component {
                   </ScrollView> */}
                   <ScrollView style = {{flex: 1}}>
                     <Text style={styles.header}>{this.state.titles[this.state.index]} by {this.state.authors[this.state.index]}</Text>
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                      <Text > by {this.state.authors[this.state.index]}</Text>
+                    </View>
                     <View style={styles.info}>
                       <ListItem item Divider>
                         <Text style={{fontWeight: 'bold'}}>Price: ${this.state.prices[this.state.index]}</Text>
