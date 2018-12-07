@@ -72,6 +72,11 @@ class Account extends React.Component {
               ><Icon name="ios-person" />
               <Text style={{color: 'black'}}>Account</Text>
             </Button>
+            <Button vertical 
+              onPress={() => this.props.switchScreen("messages")}
+              ><Icon name="message-square" />
+              <Text style={{color: 'black'}}>Messages</Text>
+            </Button>
             <Button vertical
               onPress={() => this.props.switchScreen("search")}
               ><Icon name="ios-search" />
