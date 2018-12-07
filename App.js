@@ -7,6 +7,7 @@ import Search from './components/Search';
 import Sell from './components/Sell';
 import firebase from './components/Firebase';
 import messages from './components/messages';
+import Mybooks from './components/Mybooks';
 
 export default class App extends React.Component {
 
@@ -74,6 +75,14 @@ export default class App extends React.Component {
           userId = {this.state.user.uid}
         />
       );
+    }
+    else if(this.state.currentScreen === "Mybooks" && this.state.user) {
+      return(
+        <Mybooks switchScreen = {this.switchScreen} 
+        userEmail = {this.state.user.email}
+        userId = {this.state.user.uid}
+        />
+        );
     }
   }
 

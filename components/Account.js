@@ -46,13 +46,8 @@ class Account extends React.Component {
         </Content>
 
         <View style={styles.bodyContainerUpper}>
-          <Button primary style={styles.bigButtonStyle}>
+          <Button primary onPress={() => this.props.switchScreen("Mybooks")} style={styles.bigButtonStyle}>
             <Text style={styles.bigButtonText}>My Books For Sale</Text>
-            <Icon name='ios-arrow-forward' />
-          </Button>
-          <Button primary onPress={() => this.props.switchScreen("messages")}
-                        style={styles.bigButtonStyle}  
-            ><Text style={styles.bigButtonText}>My Messages</Text>
             <Icon name='ios-arrow-forward' />
           </Button>
         </View>
@@ -71,11 +66,6 @@ class Account extends React.Component {
               onPress={() => this.props.switchScreen("account")}
               ><Icon name="ios-person" />
               <Text style={{color: 'black'}}>Account</Text>
-            </Button>
-            <Button vertical 
-              onPress={() => this.props.switchScreen("messages")}
-              ><Icon name="message-square" />
-              <Text style={{color: 'black'}}>Messages</Text>
             </Button>
             <Button vertical
               onPress={() => this.props.switchScreen("search")}
