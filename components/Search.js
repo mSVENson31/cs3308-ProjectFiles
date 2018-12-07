@@ -11,6 +11,13 @@ import firebase from './Firebase';
 var searchTitles = [];
 var searchAuthors = [];
 var searchPrices = [];
+var searchConditions = [];
+var searchISBNs = [];
+var searchPrices = [];
+var serachUids = [];
+var serachEmails = [];
+var serachCities = [];
+var serachSubjects = [];
 
 class Search extends React.Component {
 
@@ -57,6 +64,12 @@ class Search extends React.Component {
     searchTitles = [];
     searchAuthors = [];
     searchPrices = [];
+    searchConditions = [];
+    searchISBNs = [];
+    serachUids = [];
+    serachEmails = [];
+    serachCities = [];
+    serachSubjects = [];
 
     if (self.state.textbookSearch != "") {
 
@@ -77,6 +90,12 @@ class Search extends React.Component {
           searchTitles.push(snapshot.val().title);
           searchAuthors.push(snapshot.val().author);
           searchPrices.push(snapshot.val().price);
+          searchConditions.push(snapshot.val().condition);
+          searchISBNs.push(snapshot.val().isbn);
+          serachUids.push(snapshot.val().uid);
+          serachEmails.push(snapshot.val().userEmail);
+          serachCities.push(snapshot.val().city);
+          serachSubjects.push(snapshot.val().subject);
         }
         else{
           console.log("Textbook not found");
@@ -99,7 +118,17 @@ class Search extends React.Component {
     }
     else{
       return(
-        <SearchBody searchTitles={searchTitles} searchAuthors={searchAuthors} searchPrices={searchPrices} />
+        <SearchBody 
+          searchTitles={searchTitles} 
+          searchAuthors={searchAuthors} 
+          searchPrices={searchPrices} 
+          searchConditions={searchConditions} 
+          searchISBNs={searchISBNs}
+          serachUids={serachUids}
+          serachEmails={serachEmails}
+          serachCities={serachCities}
+          serachSubjects={serachSubjects}
+        />
       )
     }
   }
