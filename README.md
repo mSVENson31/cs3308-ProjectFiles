@@ -14,3 +14,15 @@ brew install Watchman npm
 ### Installing
 
 To download Book List, navigate in a terminal to the destination directory, then clone the repo, then use `npm install` to install the required node.js modules. Make sure that this version of npm is not the beta version as this caused troubles in the past for running BookList. Then simply enter the booklist project file through terminal and type `expo start`. Your browser will open and re-direct you to a metro bundler where you can select whether you want to run Book List on your personal device using the QR code, or on your computer using a simulator. 
+
+# Project Organization
+All of the code is in the `components` directory. Here's a list of what is in each file:
+- Account.js - Code for the screen displaying account info and allowing the user to navigate to the "My listings" screen
+- Firebase.js - Firebase metadata
+- Login.js - login/account creation screen
+- Mybooks.js - Container for the screen that displays the books that a user is currently trying to sell
+- MybooksBody.js - The actual content to display the user's books
+- Search.js - wrapper for searching for a textbook. Contains the search bar at the top, and passes the text from the search bar to the SearchBody.
+- SearchBody.js - does the actual search and displays matching textbooks
+- Sell.js - Screen to sell a new textbook
+- messages.js - Partially working messaging screen for realtime communication between users
