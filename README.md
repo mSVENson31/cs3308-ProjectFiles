@@ -13,4 +13,4 @@ brew install Watchman npm
 
 ### Installing
 
-To download Book List, navigate in a terminal to the destination directory, then clone the repo, then use `npm install` to install the required node.js modules. Make sure that this version of npm is not the beta version as this caused troubles in the past for running BookList. Then simply enter the booklist project file through terminal and type `expo start`. Your browser will open and re-direct you to a metro bundler where you can select whether you want to run Book List on your personal device using the QR code, or on your computer using a simulator. 
+To download Book List, navigate in a terminal to the destination directory, then clone the repo, then use `npm install` to install the required node.js modules. Make sure that this version of npm is not the beta version as this caused troubles in the past for running BookList. Then simply enter the booklist project file through terminal and type `expo start`. Your browser will open and re-direct you to a metro bundler where you can select whether you want to run Book List on your personal device using the QR code, or on your computer using a simulator. # bookList
